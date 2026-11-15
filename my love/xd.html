@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti ❤️</title>
+    <style>
+        :root {
+            --bg-color: #0d0d11;
+            --card-bg: #16161e;
+            --accent-red: #e63946;
+            --accent-vinotinto: #800020;
+            --text-color: #f1f1f1;
+            --subtext-color: #a0a0b0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Corazones flotantes de fondo */
+        .heart-bg {
+            position: absolute;
+            color: rgba(230, 57, 70, 0.3);
+            font-size: 20px;
+            pointer-events: none;
+            animation: floatUp linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* PANTALLA INICIAL - Corazón giratorio */
+        #start-screen {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            cursor: pointer;
+            background-color: var(--bg-color);
+        }
+
+        .spinning-heart {
+            font-size: 80px;
+            animation: spin 3s linear infinite;
+            filter: drop-shadow(0 0 15px var(--accent-red));
+            transition: transform 0.2s;
+        }
+
+        .spinning-heart:hover {
+            transform: scale(1.15);
+        }
+
+        .tap-text {
+            margin-top: 20px;
+            color: var(--subtext-color);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: var(--card-bg);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 5;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .section.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .message-box {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            white-space: pre-line;
+        }
+
+        /* Imagen del apartado final */
+        .photo-frame {
+            width: 100%;
+            max-height: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--accent-vinotinto);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* BOTONES */
+        .btn-next {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-vinotinto));
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2deg);
+            box-shadow: 0 6px 16px rgba(230, 57, 70, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla Inicial -->
+    <div id="start-screen" onclick="startApp()">
+        <div class="spinning-heart">❤️</div>
+        <p class="tap-text">Haz toque en el corazón</p>
+    </div>
+
+    <!-- Tarjeta Principal de Contenido -->
+    <div class="container" id="main-container">
+        
+        <!-- APARTADO 1 -->
+        <div class="section active" id="sec-1">
+            <h2>Para ti mi amor  ❤️</h2>
+            <div class="message-box">
+                <!-- ESCRIBE TU PRIMER MENSAJE AQUÍ -->
+                Se que siempre lo digo pero has palabras no alcanza para lo que siento, te amo mucho y no lo digo a solo por decirlo lo digo por que haci lo siento quisiera demostrate mucho mas aunque ahorita no cuento con mucho money esto es lo mas minimo que puedo hacer por ti amor.
+            </div>
+            <button class="btn-next" onclick="nextSection(2)">Siguiente ✨</button>
+        </div>
+
+        <!-- APARTADO 2 -->
+        <div class="section" id="sec-2">
+            <h2>Confesion  🌹</h2>
+            <div class="message-box">
+                <!-- ESCRIBE TU SEGUNDO MENSAJE AQUÍ -->
+                no creia llegar tan lejos y sabes por mi baja autoestima, porque tu eres muy hermosa, tus ojitos son bellos y eres muy tierna, a este punto no puedo pedir nada mas tienes todo lo que siempre habia queria que unca pense encontrar de verdad .
+            </div>
+            <button class="btn-next" onclick="nextSection(3)">Siguiente ✨</button>
+        </div>
+
+        <!-- APARTADO 3 (FINAL CON FOTO) -->
+        <div class="section" id="sec-3">
+            <h2>Apartado 3: Nuestro Recuerdo 📸</h2>
+            <div class="photo-frame">
+                <!-- CAMBIA LA URL DE LA IMAGEN AQUÍ -->
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600" alt="Foto juntos" id="final-photo">
+            </div>
+            <div class="message-box">
+                <!-- ESCRIBE TU MENSAJE FINAL AQUÍ -->
+                queria poner una foto de notros pero no se centro bien y quedaba cortada hay que mejor que tal si hacemos muchas fotos nuevas y a tu lado quiero hacer todo juntos Te amo mucho 🥹❤️‍🩹 !
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Generador de corazones flotantes de fondo
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        setInterval(createHeart, 350);
+
+        // Transición de la pantalla inicial al contenido
+        function startApp() {
+            const startScreen = document.getElementById('start-screen');
+            const mainContainer = document.getElementById('main-container');
+
+            startScreen.style.transition = 'opacity 0.6s ease';
+            startScreen.style.opacity = '0';
+
+            setTimeout(() => {
+                startScreen.style.display = 'none';
+                mainContainer.style.display = 'flex';
+            }, 600);
+        }
+
+        // Navegación entre apartados
+        function nextSection(currentStep) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById('sec-' + currentStep).classList.add('active');
+        }
+    </script>
+</body>
+</html>
